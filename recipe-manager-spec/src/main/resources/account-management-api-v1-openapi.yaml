@@ -1,0 +1,48 @@
+openapi: 3.0.1
+info:
+  title: account-management-specification
+  description:
+    Account management
+  version: v1
+servers:
+  - url: http://localhost:8090
+    description: The server
+tags:
+  - name: account-management
+paths:
+  /recipe-management/client-api/v1/createaccount:
+    post:
+      tags: [account-management]
+      description: add account
+      operationId: addAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/accountDetail'
+      responses:
+        200:
+          description: account created successful
+  /recipe-management/client-api/v1/authenticate:
+    post:
+      tags: [ account-management ]
+      description: authenticateUser
+      operationId: authenticateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/accountDetail'
+      responses:
+        200:
+          description: login successful
+
+components:
+  schemas:
+    accountDetail:
+      type: object
+      properties:
+        userId:
+          type: string
+        passcode:
+          type: string

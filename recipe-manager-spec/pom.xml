@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>recipe-manager</artifactId>
+        <groupId>com.abnamro.assignment</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>recipe-manager-spec</artifactId>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <openapi-generator-version>4.3.1</openapi-generator-version>
+        <swagger-core-version>1.5.24</swagger-core-version>
+        <springfox-version>2.8.0</springfox-version>
+        <generated-sources-path>${project.build.directory}/generated-sources</generated-sources-path>
+        <openapi-generator.packagePrefix>com.abnamro.assignment</openapi-generator.packagePrefix>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-core-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
+       <!-- <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.8</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator-version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-openapi-spring</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/recipe-management-api-v1.openapi.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <library>spring-boot</library>
+                            <output>${generated-sources-path}</output>
+                            <modelPackage>${openapi-generator.packagePrefix}.model</modelPackage>
+                            <apiPackage>${openapi-generator.packagePrefix}.api</apiPackage>
+                            <generateApis>true</generateApis>
+                            <generateSupportingFiles>true</generateSupportingFiles>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                                <disallowAdditionalPropertiesIfNotPresent>false
+                                </disallowAdditionalPropertiesIfNotPresent>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <returnSuccessCode>true</returnSuccessCode>
+                                <interfaceOnly>true</interfaceOnly>
+                                <skipOverwrite>true</skipOverwrite>
+                                <useTags>true</useTags>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                                <java8>true</java8>
+                                <booleanGetterPrefix>is</booleanGetterPrefix>
+                                <sourceFolder>src/main/java</sourceFolder>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>generate-openapi-spring-account</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/account-management-api-v1-openapi.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <library>spring-boot</library>
+                            <output>${generated-sources-path}</output>
+                            <modelPackage>${openapi-generator.packagePrefix}.model</modelPackage>
+                            <apiPackage>${openapi-generator.packagePrefix}.api</apiPackage>
+                            <generateApis>true</generateApis>
+                            <generateSupportingFiles>true</generateSupportingFiles>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                                <disallowAdditionalPropertiesIfNotPresent>false
+                                </disallowAdditionalPropertiesIfNotPresent>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <returnSuccessCode>true</returnSuccessCode>
+                                <interfaceOnly>true</interfaceOnly>
+                                <skipOverwrite>true</skipOverwrite>
+                                <useTags>true</useTags>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                                <java8>true</java8>
+                                <booleanGetterPrefix>is</booleanGetterPrefix>
+                                <sourceFolder>src/main/java</sourceFolder>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

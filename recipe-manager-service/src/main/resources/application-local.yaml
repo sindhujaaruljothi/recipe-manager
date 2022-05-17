@@ -1,0 +1,16 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    url: jdbc:h2:mem:recipe_management
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    generate-ddl: true
+  h2:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    console:
+      enabled: true

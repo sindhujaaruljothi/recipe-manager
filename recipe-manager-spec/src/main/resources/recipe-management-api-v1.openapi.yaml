@@ -1,0 +1,255 @@
+openapi: 3.0.1
+info:
+  title: recipe-management-specification
+  description:
+    Recipe management
+  version: v1
+servers:
+  - url: http://localhost:8090
+    description: The server
+tags:
+  - name: recipe-management
+paths:
+  /recipe-management/client-api/v1/recipe:
+    get:
+      tags: [recipe-management]
+      description: fetch recipes
+      operationId: fetchRecipes
+      parameters:
+        - in : query
+          name: recipeName
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeDetails'
+        400:
+          description: Bad Request
+    post:
+      tags:
+        - recipe-management
+      description: add recipe
+      operationId: addRecipes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipeDetail'
+      responses:
+        201:
+          description: recipe created
+    put:
+      tags:
+        - recipe-management
+      operationId: updateRecipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRecipeDetail'
+      responses:
+        200:
+          description: recipe updated
+    delete:
+      tags:
+        - recipe-management
+      operationId: deleteRecipe
+      parameters:
+        - in: query
+          name: recipeName
+          schema:
+            type: string
+      responses:
+        200:
+          description: recipe deleted successfull
+
+
+  /recipe-management/client-api/v1/ingredient:
+    get:
+      tags: [ ingredient-management ]
+      description: fetch all ingredients
+      operationId: fetchIngredients
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngredientDetails'
+    post:
+      tags:
+        - ingredient-management
+      description: add ingredient
+      operationId: addIngredient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngredientDetail'
+      responses:
+        201:
+          description: created successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngredientDetail'
+
+  /recipe-management/client-api/v1/unit:
+    get:
+      tags:
+        - unit-management
+      description: fetch all scale units
+      operationId: fetchAllScaleUnits
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitDetails'
+    post:
+      tags:
+        - unit-management
+      description: add unit
+      operationId: addScaleUnits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnitDetail'
+      responses:
+        201:
+          description: created successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnitDetail'
+components:
+  schemas:
+    RecipeDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetRecipeDetail'
+    GetRecipeDetail:
+      type: object
+      properties:
+        recipeId:
+          type: string
+          nullable: false
+        recipeName:
+          type: string
+          nullable: false
+        dishType:
+          type: string
+          nullable: false
+        noOfPeopleSuitable:
+          type: integer
+          format: int64
+          nullable: false
+        ingredients:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/Ingredients'
+        cookingInstructions:
+          nullable: false
+          type: string
+        createDateTime:
+          type: string
+        updateDatetime:
+          type: string
+    UpdateRecipeDetail:
+      type: object
+      properties:
+        recipeId:
+          type: string
+          nullable: false
+        recipeName:
+          type: string
+          nullable: false
+        dishType:
+          type: string
+          nullable: false
+        noOfPeopleSuitable:
+          type: integer
+          format: int64
+          nullable: false
+        ingredients:
+          type: array
+          nullable: false
+          items:
+            $ref: '#/components/schemas/Ingredients'
+        cookingInstructions:
+          nullable: false
+          type: string
+    RecipeDetail:
+      type: object
+      properties:
+        recipeName:
+          nullable: false
+          type: string
+        dishType:
+          nullable: false
+          type: string
+        noOfPeopleSuitable:
+          nullable: false
+          type: integer
+          format: int64
+        ingredients:
+          nullable: false
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredients'
+        cookingInstructions:
+          nullable: false
+          type: string
+
+    Ingredients:
+      type: object
+      properties:
+        ingredientDetail:
+          $ref: '#/components/schemas/IngredientDetail'
+        quantity:
+          type: number
+          format: float
+        unit:
+          $ref: '#/components/schemas/UnitDetail'
+    IngredientDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/IngredientDetail'
+    IngredientDetail:
+      type: object
+      properties:
+        ingredientName:
+          type: string
+    UnitDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/UnitDetail'
+    UnitDetail:
+      type: object
+      properties:
+        unitValue:
+          type: string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
