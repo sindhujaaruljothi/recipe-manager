@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
-public class NotFoundException extends RuntimeException{
+public class NotFoundException extends RuntimeException {
     private final HttpStatus httpStatus;
     private final String message;
 

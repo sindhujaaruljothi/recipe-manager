@@ -12,11 +12,11 @@ tags:
 paths:
   /recipe-management/client-api/v1/recipe:
     get:
-      tags: [recipe-management]
+      tags: [ recipe-management ]
       description: fetch recipes
       operationId: fetchRecipes
       parameters:
-        - in : query
+        - in: query
           name: recipeName
           schema:
             type: string
@@ -60,7 +60,8 @@ paths:
       operationId: deleteRecipe
       parameters:
         - in: query
-          name: recipeName
+          name: recipeId
+          required: true
           schema:
             type: string
       responses:
@@ -139,24 +140,19 @@ components:
       properties:
         recipeId:
           type: string
-          nullable: false
         recipeName:
           type: string
-          nullable: false
-        dishType:
-          type: string
-          nullable: false
+        isVegetarian:
+          type: boolean
+          default: false
         noOfPeopleSuitable:
           type: integer
           format: int64
-          nullable: false
         ingredients:
           type: array
-          nullable: false
           items:
             $ref: '#/components/schemas/Ingredients'
         cookingInstructions:
-          nullable: false
           type: string
         createDateTime:
           type: string
@@ -164,48 +160,50 @@ components:
           type: string
     UpdateRecipeDetail:
       type: object
+      required:
+        - recipeId
+        - recipeName
+        - noOfPeopleSuitable
+        - ingredients
+        - cookingInstructions
       properties:
         recipeId:
           type: string
-          nullable: false
         recipeName:
           type: string
-          nullable: false
-        dishType:
-          type: string
-          nullable: false
+        isVegetarian:
+          type: boolean
+          default: false
         noOfPeopleSuitable:
           type: integer
           format: int64
-          nullable: false
         ingredients:
           type: array
-          nullable: false
           items:
             $ref: '#/components/schemas/Ingredients'
         cookingInstructions:
-          nullable: false
           type: string
     RecipeDetail:
       type: object
+      required:
+        - recipeName
+        - noOfPeopleSuitable
+        - ingredients
+        - cookingInstructions
       properties:
         recipeName:
-          nullable: false
           type: string
-        dishType:
-          nullable: false
-          type: string
+        isVegetarian:
+          type: boolean
+          default: false
         noOfPeopleSuitable:
-          nullable: false
           type: integer
           format: int64
         ingredients:
-          nullable: false
           type: array
           items:
             $ref: '#/components/schemas/Ingredients'
         cookingInstructions:
-          nullable: false
           type: string
 
     Ingredients:

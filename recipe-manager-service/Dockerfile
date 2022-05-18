@@ -2,8 +2,7 @@ FROM openjdk:11-jre-slim
 
 ARG JAR_FILE
 ADD target/${JAR_FILE} service.jar
-EXPOSE 8080
+EXPOSE 8090
 ENTRYPOINT ["java", \
-            "-Dspring.profiles.active=live", \
             "-jar", \
             "service.jar"]

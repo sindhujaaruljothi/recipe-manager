@@ -17,21 +17,23 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 })
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = {UnAuthorizedException.class})
-    protected ResponseEntity<ErrorMessage> UnAuthorizedException(UnAuthorizedException exception) {
-            return new ResponseEntity<>(
-                    new ErrorMessage(exception.getHttpStatus(),
-                   exception.getMessage()),HttpStatus.UNAUTHORIZED);
+    protected ResponseEntity<ErrorMessage> unAuthorizedException(UnAuthorizedException exception) {
+        return new ResponseEntity<>(
+                new ErrorMessage(exception.getHttpStatus(),
+                        exception.getMessage()), HttpStatus.UNAUTHORIZED);
     }
+
     @ExceptionHandler(value = {BadRequestException.class})
-    protected ResponseEntity<ErrorMessage> BadRequestException(BadRequestException exception) {
+    protected ResponseEntity<ErrorMessage> badRequestException(BadRequestException exception) {
         return new ResponseEntity<>(
                 new ErrorMessage(exception.getHttpStatus(),
-                        exception.getMessage()),HttpStatus.BAD_REQUEST);
+                        exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(value = {NotFoundException.class})
-    protected ResponseEntity<ErrorMessage> NotFoundException(NotFoundException exception) {
+    protected ResponseEntity<ErrorMessage> notFoundException(NotFoundException exception) {
         return new ResponseEntity<>(
                 new ErrorMessage(exception.getHttpStatus(),
-                        exception.getMessage()),HttpStatus.NOT_FOUND);
+                        exception.getMessage()), HttpStatus.NOT_FOUND);
     }
 }

@@ -1,0 +1,564 @@
+{
+	"info": {
+		"_postman_id": "95f919c6-43fe-4dfc-9659-0693b4dfe167",
+		"name": "recipe-management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/createaccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\":\"sindhu@gmail.com\",\n    \"passcode\": \"Sindhuja@123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/createaccount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"createaccount"
+					]
+				},
+				"description": "CreateAccount"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/authenticate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\":\"sindhu@gmail.com\",\n    \"passcode\": \"Sindhuja@123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"authenticate"
+					]
+				},
+				"description": "LoginUrl"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/recipe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaW5kaHVAZ21haWwuY29tIiwiZXhwIjoxNjUyODgxNDY4LCJpYXQiOjE2NTI4NjM0Njh9.AANyI9cbxDe8BOpwBGexz6UcEJy2PV0-zmKvZ3_BZpwbTkaGw7HAOZWFNUQPBOFsc50uoh7YVwpxtN2tNKmacw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"recipeName\": \"chicken\",\n\n  \"noOfPeopleSuitable\": 20,\n  \"ingredients\": [\n    {\n      \"ingredientDetail\": {\n\n        \"ingredientName\": \"chicken\"\n      },\n      \"quantity\": 4,\n      \"unit\": {\n\n        \"unitValue\": \"number\"\n      }\n    },\n    {\n      \"ingredientDetail\": {\n\n        \"ingredientName\": \"bread\"\n      },\n      \"quantity\": 4,\n      \"unit\": {\n\n        \"unitValue\": \"number\"\n      }\n    },\n    {\n      \"ingredientDetail\": {\n\n        \"ingredientName\": \"Onion\"\n      },\n      \"quantity\": 2,\n      \"unit\": {\n\n        \"unitValue\": \"kg\"\n      }\n    },{\n     \"ingredientDetail\": {\n\n        \"ingredientName\": \"tomato\"\n      },\n      \"quantity\": 3,\n      \"unit\": {\n\n        \"unitValue\": \"kilogram\"\n      }\n    }\n  ],\n  \"cookingInstructions\": \"roast the chicken\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/recipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"recipe"
+					]
+				},
+				"description": "Post recipe"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/recipe?recipeName=chicken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaW5kaHUuc2hpbEBnbWFpbC5jb20iLCJleHAiOjE2NTI4MjY2MjcsImlhdCI6MTY1MjgwODYyN30.KmWdz4HlcLFCLIMR9JuiI2Itj_ON0r4NGzB6bH2_zUB8Qrg9vK7O43wyxgOWFmkAVGrmbLU7eOcyRPt__ATu5w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/recipe?recipeName=chicken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"recipe"
+					],
+					"query": [
+						{
+							"key": "recipeName",
+							"value": "chicken"
+						}
+					]
+				},
+				"description": "Delete"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/recipe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/recipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"recipe"
+					]
+				},
+				"description": "Get"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/recipe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzaW5kaHUuc2hpbEBnbWFpbC5jb20iLCJleHAiOjE2NTI4Mzk4MzMsImlhdCI6MTY1MjgyMTgzM30.Vbq3p2Aq5NElLXuJP_Ojj5HeKkqmo1glPKLQUzrSj9Zpps4YpT8lPMF2Sya01Y74DUr4_MhwXNlfmKfITsbIwg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recipeId\":\"9e033b9b-2aea-49db-8b10-21fa15fbaff5\",\n  \"recipeName\": \"chicken\",\n  \"dishType\": \"NonVeg\",\n  \"noOfPeopleSuitable\": 20,\n  \"ingredients\": [\n    {\n      \"ingredientDetail\": {\n\n        \"ingredientName\": \"chicken\"\n      },\n      \"quantity\": 4,\n      \"unit\": {\n\n        \"unitValue\": \"number\"\n      }\n    },\n    {\n      \"ingredientDetail\": {\n\n        \"ingredientName\": \"bread\"\n      },\n      \"quantity\": 4,\n      \"unit\": {\n\n        \"unitValue\": \"number\"\n      }\n    },\n    {\n      \"ingredientDetail\": {\n\n        \"ingredientName\": \"Onion\"\n      },\n      \"quantity\": 2,\n      \"unit\": {\n\n        \"unitValue\": \"kg\"\n      }\n    },{\n     \"ingredientDetail\": {\n\n        \"ingredientName\": \"potato\"\n      },\n      \"quantity\": 3,\n      \"unit\": {\n\n        \"unitValue\": \"kilogram\"\n      }\n    }\n  ],\n  \"cookingInstructions\": \"roast the chicken\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/recipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"recipe"
+					],
+					"query": [
+						{
+							"key": "recipeName",
+							"value": "chicken",
+							"disabled": true
+						}
+					]
+				},
+				"description": "PutRecipe\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/unit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"unitValue\": \"kg\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/unit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"unit"
+					]
+				},
+				"description": "PostUnit"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/ingredient",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"ingredientName\": \"bread\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/ingredient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"ingredient"
+					]
+				},
+				"description": "PostIngredient"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/unit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"unitValue\": \"number\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/unit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"unit"
+					]
+				},
+				"description": "GetUnit"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8090/recipe-management/client-api/v1/ingredient",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"type": "text",
+						"value": "anonymousUserId={{cookieAnonValue}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8090/recipe-management/client-api/v1/ingredient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"recipe-management",
+						"client-api",
+						"v1",
+						"ingredient"
+					]
+				},
+				"description": "GetIngredient"
+			},
+			"response": []
+		}
+	]
+}

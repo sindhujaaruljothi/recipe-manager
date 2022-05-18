@@ -23,6 +23,6 @@ public class UnitController implements UnitManagementApi {
     @Override
     public ResponseEntity<List<UnitDetail>> fetchAllScaleUnits() {
 
-        return new ResponseEntity<>(unitManager.getAllUnit(),HttpStatus.OK);
+        return new ResponseEntity<>(unitManager.getAllUnit(), HttpStatus.OK);
     }
 }

@@ -12,7 +12,7 @@ tags:
 paths:
   /recipe-management/client-api/v1/createaccount:
     post:
-      tags: [account-management]
+      tags: [ account-management ]
       description: add account
       operationId: addAccount
       requestBody:

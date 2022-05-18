@@ -39,11 +39,11 @@
             <version>0.1.0</version>
         </dependency>
 
-       <!-- <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox-version}</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>io.springfox</groupId>
+             <artifactId>springfox-swagger2</artifactId>
+             <version>${springfox-version}</version>
+         </dependency>-->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
@@ -65,7 +65,8 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/recipe-management-api-v1.openapi.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/recipe-management-api-v1.openapi.yaml
+                            </inputSpec>
                             <generatorName>spring</generatorName>
                             <library>spring-boot</library>
                             <output>${generated-sources-path}</output>
@@ -96,7 +97,8 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/account-management-api-v1-openapi.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/account-management-api-v1-openapi.yaml
+                            </inputSpec>
                             <generatorName>spring</generatorName>
                             <library>spring-boot</library>
                             <output>${generated-sources-path}</output>

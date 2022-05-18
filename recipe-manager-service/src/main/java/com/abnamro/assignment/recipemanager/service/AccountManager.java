@@ -24,27 +24,28 @@ import static com.abnamro.assignment.recipemanager.constant.RecipeManagerConstan
 public class AccountManager {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    public void createAccount(String userId, String password){
-        validate(userId,USERID_REGEX,USERID_NOT_VALID);
-        validate(password,PASSWORD_REGEX,PASSWORD_NOT_VALID);
+
+    public void createAccount(String userId, String password) {
+        validate(userId, USERID_REGEX, USERID_NOT_VALID);
+        validate(password, PASSWORD_REGEX, PASSWORD_NOT_VALID);
         Optional<UserProfile> user = userRepository.findById(userId);
-        if(user.isPresent()){
+        if (user.isPresent()) {
             log.error("user is already present");
             throw new BadRequestException(USERID_EXIST);
         }
-        userRepository.save(getUserManagement(userId,password));
+        userRepository.save(getUserManagement(userId, password));
     }
 
-    private void validate(String textCheck, String regex,String errorMessage) {
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(textCheck);
-            if(!matcher.matches()){
-                throw new BadRequestException(errorMessage);
-            }
+    private void validate(String textCheck, String regex, String errorMessage) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(textCheck);
+        if (!matcher.matches()) {
+            throw new BadRequestException(errorMessage);
+        }
     }
 
     private UserProfile getUserManagement(String userId, String password) {
-        return new UserProfile(userId,passwordEncoder.encode(password));
+        return new UserProfile(userId, passwordEncoder.encode(password));
     }
 
 }

@@ -4,7 +4,6 @@ import com.abnamro.assignment.recipemanager.exception.NotFoundException;
 import com.abnamro.assignment.recipemanager.model.UserProfile;
 import com.abnamro.assignment.recipemanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;

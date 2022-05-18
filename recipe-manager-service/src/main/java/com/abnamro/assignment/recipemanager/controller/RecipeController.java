@@ -24,15 +24,15 @@ public class RecipeController implements RecipeManagementApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteRecipe(String recipeName) {
-         recipeManager.deleteRecipe(recipeName);
-         return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<Void> deleteRecipe(String recipeId) {
+        recipeManager.deleteRecipe(recipeId);
+        return ResponseEntity.status(HttpStatus.OK).build();
 
     }
 
     @Override
     public ResponseEntity<List<GetRecipeDetail>> fetchRecipes(String recipeName) {
-        return new ResponseEntity<>(recipeManager.getRecipes(recipeName),HttpStatus.OK);
+        return new ResponseEntity<>(recipeManager.getRecipes(recipeName), HttpStatus.OK);
     }
 
     @Override

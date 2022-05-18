@@ -37,29 +37,37 @@ public class RecipeManager {
 
     @Transactional
     public void addRecipe(RecipeDetail recipeDetail) {
-        CustomUserDetail customUserDetail = (CustomUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CustomUserDetail customUserDetail = getPrincipal();
         String recipeId = getRecipeId();
         Recipe recipe = RECIPE_MAPPER.mapToPostRecipe(recipeDetail, recipeId);
         addIngredientAndScaleUnit(recipe, recipeDetail.getIngredients());
+
         recipe.setUserProfile(customUserDetail.getUserProfile());
         recipeRepository.save(recipe);
     }
 
-    private Recipe addIngredientAndScaleUnit(Recipe recipe, List<Ingredients> ingredients) {
+    private CustomUserDetail getPrincipal() {
+
+        return (CustomUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    private void addIngredientAndScaleUnit(Recipe recipe, List<Ingredients> ingredients) {
         List<String> ingredientNameList = getIngredientNameList();
         List<String> scaleUnits = getScaleUnitsList();
-        for (Ingredients ingredientDetail : ingredients) {
+        ingredients.forEach(ingredientDetail -> {
             Ingredient ingredient = INGREDIENT_MAPPER.mapToIngredient(ingredientDetail.getIngredientDetail());
             ScaleUnit scaleUnit = UNIT_MAPPER.mapToScaleUnit(ingredientDetail.getUnit());
             if (!ingredientNameList.contains(ingredientDetail.getIngredientDetail().getIngredientName())) {
                 ingredientRepository.save(ingredient);
+                ingredientNameList.add(ingredientDetail.getIngredientDetail().getIngredientName());
             }
             if (!scaleUnits.contains(ingredientDetail.getUnit().getUnitValue())) {
                 unitRepository.save(scaleUnit);
+                scaleUnits.add(ingredientDetail.getUnit().getUnitValue());
             }
             recipe.addIngredient(ingredient, ingredientDetail.getQuantity(), UNIT_MAPPER.mapToScaleUnit(ingredientDetail.getUnit()));
-        }
-        return recipe;
+        });
+
     }
 
     private List<String> getScaleUnitsList() {
@@ -87,23 +95,23 @@ public class RecipeManager {
     }
 
     @Transactional
-    public void deleteRecipe(String recipeName) {
-        CustomUserDetail userProfile = (CustomUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public void deleteRecipe(String recipeId) {
+        CustomUserDetail userProfile = getPrincipal();
 
-        Integer status = recipeRepository.deleteByRecipeNameAndUserProfile(recipeName, userProfile.getUserProfile());
-        if(status == 0){
+        Integer status = recipeRepository.deleteByRecipeIdAndUserProfile(recipeId, userProfile.getUserProfile());
+        if (status == 0) {
             throw new UnAuthorizedException(USER_NOT_AUTHORIZED);
         }
     }
 
     public void updateRecipe(UpdateRecipeDetail recipeDetails) {
-        CustomUserDetail userProfile = (CustomUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<Recipe> optionalRecipe = recipeRepository.findByRecipeIdAndUserProfile(recipeDetails.getRecipeId(),userProfile.getUserProfile());
-        if(!optionalRecipe.isPresent()){
+        CustomUserDetail userProfile = getPrincipal();
+        Optional<Recipe> optionalRecipe = recipeRepository.findByRecipeIdAndUserProfile(recipeDetails.getRecipeId(), userProfile.getUserProfile());
+        if (optionalRecipe.isEmpty()) {
             throw new UnAuthorizedException(USER_NOT_AUTHORIZED);
         }
         Recipe recipe = RECIPE_MAPPER.mapToPatchRecipe(recipeDetails);
-        addIngredientAndScaleUnit(recipe,recipeDetails.getIngredients());
+        addIngredientAndScaleUnit(recipe, recipeDetails.getIngredients());
         recipe.setUserProfile(userProfile.getUserProfile());
         recipe.setCreateDatetime(optionalRecipe.get().getCreateDatetime());
         recipeRepository.save(recipe);

@@ -81,7 +81,7 @@ Set active profile to local. "spring.profiles.active=local"
 
 I have used swagger for API documentation which generates playground where user can examine the enabled APIs. 
 
-To access the swagger documentation please go to: http://localhost:8090/swagger-ui.html
+To access the swagger documentation please go to: http://localhost:8090/swagger-ui/index.html
 
 * Below are the list of APIs which are whitelisted and does not require any authentication, rest all fully secured and without proper token the application will reject the request
   * ✨[/recipe-management/client-api/v1/createaccount](http://localhost:8090/recipe-management/client-api/v1/createaccount) 
@@ -98,6 +98,10 @@ Also, user can not perform any action (except GET) on recipes created by other u
 * login
   * ✨[/recipe-management/client-api/v1/authenticate](http://localhost:8090/recipe-management/client-api/v1/authenticate) 
   * Once authenticated, please copy the JWT token returned by the API and attach it in the header for authorized requests
+  * ```
+    Ex: "authorization": "Bearer JWT_TOKEN"
+    Replace JWT_TOKEN with actual value while passing in the header
+    ```
 * create recipe (make sure to attach JWT token in header)
   * ✨[/recipe-management/client-api/v1/recipe](http://localhost:8090/recipe-management/client-api/v1/recipe)  POST (refer swagger for input payload)
 * Update recipe (make sure to attach JWT token in header)
@@ -119,7 +123,7 @@ There are few more additional APIs I build to make the application more robust a
 
 
 ## Postman
-To test the application locally I have also committed the postman collections under `./recipe-manager/postman/` which can be used to test it locally
+To test the application locally I have also committed the postman collections under `./recipe-manager/postman/recipe-management.postman_collection.json` which can be used to test it locally
 
 
 

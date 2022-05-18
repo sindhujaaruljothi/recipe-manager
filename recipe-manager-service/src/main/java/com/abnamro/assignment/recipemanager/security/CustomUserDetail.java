@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class CustomUserDetail implements UserDetails {
-    private UserProfile userProfile;
-    private String password;
-    private String username;
-    private boolean accountNonExpired;
-    private boolean accountNonLocked;
-    private boolean credentialsNonExpired;
-    private boolean enabled;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final transient UserProfile userProfile;
+    private final String password;
+    private final String username;
+    private final boolean accountNonExpired;
+    private final boolean accountNonLocked;
+    private final boolean credentialsNonExpired;
+    private final boolean enabled;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public CustomUserDetail(UserProfile user) {
         this.userProfile = user;

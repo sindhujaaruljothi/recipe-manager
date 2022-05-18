@@ -10,13 +10,13 @@ import com.abnamro.assignment.recipemanager.model.Recipe;
 import com.abnamro.assignment.recipemanager.model.RecipeIngredientQuantity;
 import com.abnamro.assignment.recipemanager.model.ScaleUnit;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +24,7 @@ import java.util.Set;
 public interface RecipeMapper {
     RecipeMapper RECIPE_MAPPER = Mappers.getMapper(RecipeMapper.class);
 
-    Recipe mapToPostRecipe(RecipeDetail RecipeDetail, String recipeId);
+    Recipe mapToPostRecipe(RecipeDetail recipeDetail, String recipeId);
 
     Recipe mapToPatchRecipe(UpdateRecipeDetail getRecipeDetail);
 
@@ -38,55 +38,55 @@ public interface RecipeMapper {
         GetRecipeDetail recipeDetail = new GetRecipeDetail();
         recipeDetail.setRecipeId(recipe.getRecipeId());
         recipeDetail.setRecipeName(recipe.getRecipeName());
-        recipeDetail.setDishType(recipe.getDishType());
+        recipeDetail.isVegetarian(recipe.getDishType());
         recipeDetail.setNoOfPeopleSuitable(recipe.getNoOfPeopleSuitable());
         recipeDetail.setCookingInstructions(recipe.getCookingInstructions());
-        recipeDetail.setCreateDateTime(OffsetToStringDateTime(recipe.getCreateDatetime()));
+        recipeDetail.setCreateDateTime(offsetToStringDateTime(recipe.getCreateDatetime()));
         recipeDetail.setIngredients(getIngredients(recipe.getIngredientQuantitySet()));
 
         return recipeDetail;
     }
 
-    default List<Ingredients> getIngredients(Set<RecipeIngredientQuantity> recipeIngredientQuantity){
-        if ( recipeIngredientQuantity == null ) {
-            return null;
+    default List<Ingredients> getIngredients(Set<RecipeIngredientQuantity> recipeIngredientQuantity) {
+        if (recipeIngredientQuantity == null) {
+            return Collections.emptyList();
         }
 
-        List<Ingredients> list = new ArrayList<Ingredients>( recipeIngredientQuantity.size() );
-        for ( RecipeIngredientQuantity recipeIngredientQuantity1 : recipeIngredientQuantity ) {
-            list.add( recipeIngredientQuantityToIngredients( recipeIngredientQuantity1 ) );
+        List<Ingredients> list = new ArrayList<>(recipeIngredientQuantity.size());
+        for (RecipeIngredientQuantity recipeIngredientQuantity1 : recipeIngredientQuantity) {
+            list.add(recipeIngredientQuantityToIngredients(recipeIngredientQuantity1));
         }
 
         return list;
     }
 
-    default Ingredients recipeIngredientQuantityToIngredients(RecipeIngredientQuantity recipeIngredientQuantity){
-        if ( recipeIngredientQuantity == null ) {
+    default Ingredients recipeIngredientQuantityToIngredients(RecipeIngredientQuantity recipeIngredientQuantity) {
+        if (recipeIngredientQuantity == null) {
             return null;
         }
 
         Ingredients ingredients = new Ingredients();
         ingredients.setIngredientDetail(new IngredientDetail().ingredientName(recipeIngredientQuantity.getIngredient().getIngredientName()));
-        ingredients.setQuantity( recipeIngredientQuantity.getQuantity() );
-        ingredients.setUnit( scaleUnitToUnitDetail( recipeIngredientQuantity.getUnit() ) );
+        ingredients.setQuantity(recipeIngredientQuantity.getQuantity());
+        ingredients.setUnit(scaleUnitToUnitDetail(recipeIngredientQuantity.getUnit()));
 
         return ingredients;
 
-}
+    }
 
     default UnitDetail scaleUnitToUnitDetail(ScaleUnit scaleUnit) {
-        if ( scaleUnit == null ) {
+        if (scaleUnit == null) {
             return null;
         }
 
         UnitDetail unitDetail = new UnitDetail();
 
-        unitDetail.setUnitValue( scaleUnit.getUnitValue() );
+        unitDetail.setUnitValue(scaleUnit.getUnitValue());
 
         return unitDetail;
     }
 
-    default String OffsetToStringDateTime(OffsetDateTime createDatetime) {
+    default String offsetToStringDateTime(OffsetDateTime createDatetime) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd‐MM‐yyyy HH:mm");
         return fmt.format(createDatetime);
     }
