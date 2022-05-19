@@ -107,7 +107,7 @@ Also, user can not perform any action (except GET) on recipes created by other u
 * Update recipe (make sure to attach JWT token in header)
   * ✨[/recipe-management/client-api/v1/recipe?](http://localhost:8090/recipe-management/client-api/v1/recipe?)  PUT (refer swagger for input payload)
 * Delete recipe (make sure to attach JWT token in header)
-  * ✨[recipe-management/client-api/v1/recipe?recipeName=SomeThing](http://localhost:8090/recipe-management/client-api/v1/recipe?recipeName=SomeThing) DEL (refer swagger for input payload) 
+  * ✨[recipe-management/client-api/v1/recipe?recipeName=SomeThing](http://localhost:8090/recipe-management/client-api/v1/recipe?recipeId=SomeThing) DEL (refer swagger for input payload) 
 * retrieve all recipe
   * ✨[recipe-management/client-api/v1/recipe](http://localhost:8090/recipe-management/client-api/v1/recipe)
 
