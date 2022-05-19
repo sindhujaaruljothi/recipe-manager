@@ -43,6 +43,7 @@ public interface RecipeMapper {
         recipeDetail.setCookingInstructions(recipe.getCookingInstructions());
         recipeDetail.setCreateDateTime(offsetToStringDateTime(recipe.getCreateDatetime()));
         recipeDetail.setIngredients(getIngredients(recipe.getIngredientQuantitySet()));
+        recipeDetail.setUpdateDatetime(offsetToStringDateTime(recipe.getUpdateDateTime()));
 
         return recipeDetail;
     }
@@ -86,8 +87,11 @@ public interface RecipeMapper {
         return unitDetail;
     }
 
-    default String offsetToStringDateTime(OffsetDateTime createDatetime) {
+    default String offsetToStringDateTime(OffsetDateTime dateTime) {
+        if(dateTime == null){
+            return null;
+        }
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd‐MM‐yyyy HH:mm");
-        return fmt.format(createDatetime);
+        return fmt.format(dateTime);
     }
 }
