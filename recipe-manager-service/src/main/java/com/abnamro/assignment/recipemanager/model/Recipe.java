@@ -33,8 +33,8 @@ public class Recipe {
     private String recipeId;
     @Column(name = "recipe_name")
     private String recipeName;
-    @Column(name = "dish_type", columnDefinition = "boolean default false")
-    private Boolean dishType;
+    @Column(name = "is_vegetarian", columnDefinition = "boolean default false")
+    private Boolean isVegetarian;
     @Column(name = "no_of_people_suitable")
     private Long noOfPeopleSuitable;
     @OneToMany(

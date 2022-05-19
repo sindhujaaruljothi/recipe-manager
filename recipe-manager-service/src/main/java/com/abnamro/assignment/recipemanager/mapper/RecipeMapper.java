@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -38,7 +39,7 @@ public interface RecipeMapper {
         GetRecipeDetail recipeDetail = new GetRecipeDetail();
         recipeDetail.setRecipeId(recipe.getRecipeId());
         recipeDetail.setRecipeName(recipe.getRecipeName());
-        recipeDetail.isVegetarian(recipe.getDishType());
+        recipeDetail.isVegetarian(Objects.nonNull(recipe.getIsVegetarian()) ? recipe.getIsVegetarian() : false);
         recipeDetail.setNoOfPeopleSuitable(recipe.getNoOfPeopleSuitable());
         recipeDetail.setCookingInstructions(recipe.getCookingInstructions());
         recipeDetail.setCreateDateTime(offsetToStringDateTime(recipe.getCreateDatetime()));
@@ -88,7 +89,7 @@ public interface RecipeMapper {
     }
 
     default String offsetToStringDateTime(OffsetDateTime dateTime) {
-        if(dateTime == null){
+        if (dateTime == null) {
             return null;
         }
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd‐MM‐yyyy HH:mm");
